@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Graduate programs</title>
+<style>
+/* Universal Selector */
+* {
+  margin: 0;         /* Removes the default margin */
+  padding: 0;        /* Removes the default padding */
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+/* Styling the Harvard University logo */
+.harvard-logo {
+  position: absolute;
+  top: 5px; 
+  left: 20px;
+  height: 100px;
+  width: auto;
+  z-index: 10;
+}
+
+/* Styling the side Navigation menu */
+.side-navigation {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 999; 
+  top: 0;
+  right: 0;
+  left: auto;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+/* Styling the links of the side Navigation menu */
+.side-navigation a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+/* Adding hover effect on the navigation links of side navigation menu */
+.side-navigation a:hover {
+  color:  #8c8c8c;
+}
+
+/* Styling close button of side navigation menu */
+.side-navigation .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Styling the Hamburger icon (≣) */
+span[onclick="openNav()"] {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    color: white;
+    z-index: 9999;
+}
+
+.images-container {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;   /* Rounded the corners of an image */
+}
+
+.video {
+  width: 100%;
+  height: 100%;   
+  object-fit: cover;
+  position: absolute;     
+  top: 0;                 
+  left: 0;               
+  z-index: 1; 
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+h1 {
+  justify-content: center;
+  margin-left: 440px;
+  margin-top: 50px;
+  font-size: 30px;
+}
+
+.course-container {
+   display: grid;
+   padding: 0 42px;
+   margin-left: 40px;
+   margin-right: 40px;
+   box-sizing: border-box;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 20px;
+ }
+
+/* Styling the box for the courses */
+.course-information {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  padding: 20px;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-top: 110px;
+ }
+
+/* Adding hover effect on boxes */
+.course-information:hover {
+  transform: scale(1.03);
+  background-color: #2a2a2a;
+}
+
+/* Styling the image of the course boxes */
+.course-information img {
+  width: 100%;
+  height: 152px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.course-information h2 {
+  margin: 12px 0 7px;
+  color: #800000;
+}
+
+.course-information p {
+    color: #ddd;
+ }
+
+/* Styling button */
+.button button {
+    background-color:  #800000;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/* Add a hover effect to the button */
+.button button:hover {
+  background-color:  #ee9b00;
+}
+
+/* Styling the slide-in panel */
+.side-panel {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+/* Styling the background video of the slide-in panel */
+.side-panel video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    }
+
+.close-btn{
+ position: absolute;
+  top: 20px;
+  font-size: 35px;
+  color: white;   /* Make sure it's visible */
+  z-index: 1001;    /* Must be above the video and overlay */
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.3);   /* optional: add background to make it stand out */
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Adding semi-transparent overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.75);
+    z-index: -1;
+}
+
+.Panel-information {
+    padding: 60px 40px;
+    color: white;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.box {
+    background-color: rgba(0,0,0,0.6);
+    border: 1px solid #888;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Styling the close button of slide-in panel */
+.side-panel .close-btn {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    z-index: 4000;
+    }
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+/* Styling the footer */
+.footer {
+    background-color:  #800000;
+    color: white;
+    border-top: 6px solid  #ee9b00;
+    padding: 30px;           /* Adding space inside the footer */
+    margin-top: 100px;       /* Adding space above the footer */
+}
+  </style>
+</head>
+<body>
+     <header class="logo-title">
+       <!-- University Logo -->
+       <img src="website logo.png" alt="Harvard Logo" class="harvard-logo">
+     </header>
+   
+      <!-- Side Navigation Menu -->
+      <nav id="side-navigation" class="side-navigation">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="Undergraduate.html">Undergraduate</a>
+        <a href="Graduate.html">Graduate</a>
+        <a href="Student life.html">Student life</a>
+        <a href="Our faculty.html">Our faculty</a>
+        <a href="About Us.html">About Us</a>
+        <a href="Events.html">Events</a>
+      </nav>
+     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+   <main>
+        <!-- Adding video -->
+         <section class="video-container">
+           <video class="video"  autoplay muted loop playsinline>
+             <source src="Graduate.mp4" type="video/mp4"> 
+           </video> 
+          </section>
+   
+        <!-- Heading -->
+        <h1>Graduate programs of Harvard University</h1>
+
+        <!-- Course Names and descriptions -->
+       <section class="box-container">
+          <div class="course-container">
+              <!-- Course 1 -->
+              <article class="course-information" onclick="openPanel('Master of Business Administration (MBA)', 'The Master of Business Administration curriculum would allow students to learn about Responsible Business Management practices in alignment with UN Sustainable Development Goals (SDG). Students would also have the opportunity to pursue internship in companies to gain valuable practical experience, enhancing their employability.', '1 year', '£10,700 for UK students, £11,800 for international students')">
+                <img src="https://th.bing.com/th/id/OIP.56b9kms5_kGain_DldcATgHaEK?rs=1&pid=ImgDetMain" alt="Bachelor of Business Administration">
+                <h2>Master of Business Administration (MBA)</h2>
+                <p>Our MBA program offers you the opportunity to become an accomplished global leader.</p>
+                <div class="button">
+                  <button>View Program details</button>
+                </div>
+             </article>
+
+             <!-- Course 2 -->
+             <article class="course-information" onclick="openPanel('Master of Science in Computer Science (MSC)', 'The MSC in Computer Science program is concerned with the theoretical foundations of information and computation. Computation is defined as any type of calculation or use of computing technology that follows well-defined models (such as algorithms and protocols) in the practice of information processing. The study of computer science involves systematically studying, building, and testing methodical processes (such as algorithms) in order to aid the acquisition, representation, processing, storage, and communication of information. The program provides a strong understanding of the relationship between computer hardware and software and all related issues. It is key to many career opportunities in high-tech manufacturing, in software development, and in mobile and digital security. Students are offered opportunities to customize their education by selecting from a wide pool of technical elective courses.', '2 years', 'The tuition fees to pursue this program is £39,708 per year')">
+                <img src="https://th.bing.com/th/id/OIP.JENvqn3GyclruDAVpfyuRAHaE8?rs=1&pid=ImgDetMain" alt="Bachelor of Computer Science (BCS)">
+                <h2>Master of Science in Computer Science (MSC)</h2>
+                <p>A Master of Science in Computer Science (MSCS) is a graduate degree designed to prepare students for advanced careers in technology and computing.</p>
+                <div class="button">
+                  <button>View Program details</button>
+                </div>
+             </article>
+
+             <!-- Course 3 -->
+             <article class="course-information" onclick="openPanel('Master of Laws (LLM)', 'The course structure is designed to meet the needs of students who would consider to pursue higher studies or a career in countries whose legal system relies on either civil or common law.', 'The LL.M programme covers 1 academic years. ', 'The tuition fee for L.L.M is £10,784 for the full Program')">
+                <img src="https://th.bing.com/th/id/OIP.phkvbHuDf2R_klYnaQfLYAHaD4?rs=1&pid=ImgDetMain" alt="Bachelor of Laws (LLB)">
+                <h2>Master of Laws (LLM)</h2>
+                <p>The Master of Laws (LL.M) is a Graduate law degree that offers advanced legal education in specialized areas of law.</p>
+               <div class="button">
+                 <button>View Program details</button>
+               </div>
+             </article>
+
+             <!-- Course 4 -->
+             <article class="course-information" onclick="openPanel('Doctor of Medicine (MD)', 'MD course enables a candidate to secure in-depth knowledge and hands-on training in multiple areas including General Medicine, Anatomy, Radiotherapy, etc.', '3 Years', 'The average course fee for MD is around £70,554 per year', )">
+                <img src="https://th.bing.com/th/id/R.9b68d83f574476a38858585ca1c2928b?rik=cisBRHRbpEZeAw&pid=ImgRaw&r=0" alt="Bachelor of Medicine, Bachelor of Surgery (MBBS)">
+                <h2>Doctor of Medicine (MD)</h2>
+                <p>Doctor of Medicine, commonly known as MD is a popular master-level specialized program that candidates pursue after acquiring an MBBS degree. </p>
+                <div class="button">
+                  <button>View Program details</button>
+                </div>
+            </article>
+         </div>
+       </section>
+    </main>
+
+  <!-- Adding background video in the slide-in panel -->
+  <aside id="sidePanel" class="side-panel"> 
+    <video autoplay muted loop id="bgVideo">
+      <source src="programs video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Adding overlay background over the background video of slide-in panel -->
+    <div class="overlay"></div>
+    <!-- Close button to close the slide-in panel -->
+    <span class="close-btn" onclick="closePanel()">&times;</span>
+    <!-- Creating slide-in panel  -->
+    <div class="Panel-information">
+
+      <!-- Box for the Course Title -->
+      <div class="box">
+        <h2 id="Course-Title">Course Title</h2>
+      </div>
+
+      <!-- Box for the Course overview -->
+      <div class="box">
+        <h3>Program Overview</h3>
+        <p id="Overview"></p>
+      </div>
+
+      <!-- Box for the Duration of course -->
+      <div class="box">
+        <h3>Duration</h3>
+        <p id="Duration"></p>
+      </div>
+
+      <!-- Box for the Yearly fee-->
+      <div class="box">
+        <h3>Yearly Fee</h3>
+        <p id="Fees"></p>
+      </div>
+    </div>
+  </aside>
+
+    <!-- Adding footer -->
+    <footer class="footer">
+        <div class="container">
+        <p>
+          <strong>Harvard University</strong> <br>
+          admissions@harvarduniversity <br> 176-825-5912
+        </p>
+        
+     <div class="text-align">
+        <p>
+          <strong>Study at Hardvard University</strong> <br>
+           Undergraduate <br>
+           Postgraduate <br>
+           Continuing education <br>
+           Executive and professional education <br>
+           Courses in education
+        </p>
+     </div>
+        
+     <div class="text-align">
+        <p>
+          <strong>About the University</strong> <br>
+          Give to Harvard University <br>
+          Student life <br>
+          New & Events <br>
+        </p>
+     </div>
+
+        <!-- Official links of the Harvard University -->
+        <div class="text-align">
+          <p><strong>Connect with us through:</strong><br>
+              <a href="https://www.instagram.com/harvard/" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  Instagram
+              </a><br>
+
+              <a href="https://www.tiktok.com/@harvard" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="tiktok.png" alt="TikTok" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  TikTok
+              </a><br>
+
+              <a href="https://www.youtube.com/user/Harvard" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="youtube.png" alt="YouTube" width="24" style="vertical-align: middle; margin-right: 5px;">
+                 YouTube
+              </a>
+           </p>
+        </div>
+      </div>
+    </footer>
+
+  <!-- Linking a JavaScript file  -->
+  <script src="Graduate.js"></script>
+</body>
+</html>

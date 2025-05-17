@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student life</title>
+</head>
+<style>
+/* Universal Selector */
+* {
+  margin: 0;         /* Removes  the default margin */
+  padding: 0;        /* Removes the default padding */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #000000;
+  color: #fff;
+}
+
+/* Adding semi-transparent overlay */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(40, 39, 39, 0.6);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Styling the Harvard University logo */
+.harvard-logo {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  height: 100px;
+  width: auto;
+  z-index: 1000;
+}
+
+/* Styling the side Navigation menu */
+.side-navigation {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  left: auto;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+/* Styling the links of the side Navigation menu */
+.side-navigation a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Adding hover effect on the navigation links of side navigation menu */
+.side-navigation a:hover {
+  color: #8c8c8c;
+}
+
+/* Styling close button of side navigation menu */
+.side-navigation .close-button {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  left: auto;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Manage layout for small screens */
+@media screen and (max-height: 450px) {
+  .side-navigation {padding-top: 15px;}
+  .side-navigation a {font-size: 18px;}
+}
+
+/* Styling the Hamburger icon (≣) */
+span[onclick="openNav()"] {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  color: white;
+  z-index: 2001;
+}
+
+/* Styling a video */
+.video {
+ width: 100%;
+ height: 100%;   
+ object-fit: cover;
+ position: absolute;     
+ top: 0;                 
+ left: 0;               
+ z-index: 1; 
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;    
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;    /* Width of the semi-transparent overlay */
+  height: 100%;     /* Height of the semi-transparent overlay */       
+  z-index: 2;
+  
+}
+
+h1 {
+  text-align: center;   /* Text alignment of the heading */
+  color: #fff;      /* Text color */
+  margin-top: 50px;    /* Space above the heading */
+}
+
+.overlay h2 {
+  font-size: 4rem;
+}
+
+.text {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 72vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 10;
+}
+
+.text h1 {
+    font-size: 5rem;
+    margin-bottom: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    position: relative;
+    z-index: 20; 
+}
+
+
+.Detail-information {
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    height: auto;
+    z-index: 10;
+}
+
+.Title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 21px;
+    color: white;
+    text-align: center;
+}
+
+.Boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  width: 100%;
+   padding: 0 70px;
+}
+
+.Box {
+    background-color: #333;
+    width: 30%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.Box img {
+  width: 100%;
+  height: 300px;
+}
+
+.Box h2 {
+  padding: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: black;
+}
+
+.Box p {
+  padding: 0 20px 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+ 
+.Box.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+
+.Box:hover {
+    transform: scale(1.05);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+.image img.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+
+.White-box {
+  position: absolute;
+  top: 20%;
+  right: 55px;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 32px;
+  width: 405px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+.White-box.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+
+
+.White-box:hover {
+    transform: scale(1.05);
+}
+
+
+.White-box h2 {
+  margin-top: 0;
+  color: #800000; 
+}
+
+.paragraph {
+  width: 40px;
+  height: 4px;
+  background-color: #800000; 
+  margin: 10px 0;
+}
+
+.White-box p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.White-box .link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #800000; 
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.White-box .link::after {
+  content: ' ➔';
+}
+
+
+.Residential-Life {
+  padding: 39px;
+  max-width: 1190px;
+  margin: auto;
+}
+
+.Text {
+  max-width: 1100px;
+  margin-bottom: 42px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+    
+.Text.visible {
+  opacity: 1;      /* Make the text appear after fade in animation */
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+
+.Text h2 {
+  font-size: 47px;
+  margin-bottom: 22px;
+}
+
+.Text p {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.Image-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.Left-picture {
+  flex: 2;
+  transform: translateY(30px);
+  opacity: 0;    /* Hide the image for fade in animation */
+  transition: opacity 0.5s ease, transform 0.5s ease;      /* Smooth transition for the fade in animation */
+}
+
+.Left-picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+       
+.Left-picture.visible {
+  opacity: 1;       /* Make the image appear after fade in animation */
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+} 
+
+.Right-picture {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.Right-picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+       
+.Right-picture.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+} 
+
+
+@media (max-width: 767px) {
+  .Image-container {
+   flex-direction: column;
+}
+      
+.Left-picture, .Right-picture {
+  flex: unset;
+  width: 100%;
+    }
+}
+
+.container-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+/* Styling the footer */
+.footer {
+    background-color:  #800000;
+    color: white;
+    border-top: 6px solid  #ee9b00;
+    padding: 30px;
+    margin-top: 10px;
+}
+</style>
+
+<body>
+      <header class="logo-title">
+        <!-- University Logo -->
+        <img src="website logo.png" alt="Harvard Logo" class="harvard-logo">
+      </header>
+   
+      <!-- Side Navigation Menu -->
+      <nav id="side-navigation" class="side-navigation">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="Undergraduate.html">Undergraduate</a>
+        <a href="Graduate.html">Graduate</a>
+        <a href="Student life.html">Student life</a>
+        <a href="Our Faculty.html">Our Faculty</a>
+        <a href="About Us.html">About Us</a>
+        <a href="Events.html">Events</a>
+      </nav>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+    <!-- Adding video -->
+    <section class="video-container">
+       <video class="video"  autoplay muted loop playsinline>
+          <source src="Student life.mp4" type="video/mp4"> 
+       </video> 
+      <div class="overlay"> 
+         <h2>Student Life</h2> 
+      </div> 
+    </section>
+  
+  <main>
+      <!-- About Student life -->
+      <section class="Detail-information">
+          <div class="Title">Explore</div>
+          <div class="Boxes">
+              <!-- Student Living -->
+              <article class="Box">
+                 <img src="https://www.timeshighereducation.com/student/sites/default/files/styles/default/public/2022-08/iStock-818088096.jpg?itok=xaDvmNs0" alt="Student Living">
+                <h2>Student Living</h2>
+                <p>Students learn better when their living space is safe, clean and attractive. That’s why we work hard to create a positive, comfortable and welcoming environment. We offer high-quality and a variety of food options and living arrangements to ensure you have the best academic experience.</p>
+              </article>
+
+             <!-- Health & Wellness -->
+             <article class="Box">
+               <img src="https://media.istockphoto.com/id/2167249236/photo/happy-playful-multiethnic-group-of-young-friends-bonding-outdoors.jpg?s=612x612&w=0&k=20&c=Ip_5LbDBKSQuBmbOR-w1VWi1wOTWxGXgTiPhkVQB6jM=" alt="Health & Wellness">
+               <h2>Health & Wellness</h2>
+               <p>Success happens when your mind and body are functioning at their best. We provide a variety of care options, resources and support. Find the care you need to get back to what matters most – enjoying your time.</p>
+             </article>
+
+             <!-- Safety & Security -->
+             <article class="Box">
+               <img src="https://cdn.pixabay.com/photo/2016/11/14/05/15/academic-1822683_1280.jpg" alt="Safety & Security">
+               <h2>Safety & Security</h2>
+               <p>From night rides and walking buddies to a 24-hour advice line and a community-oriented police department, we want all students to feel safe. Explore our safety & security resources.</p>
+             </article>
+          </div>
+       </section>
+
+       <!-- Adding image -->
+      <div class="container">
+        <div class="image">
+         <img src="https://studentopportunitycenter.com/wp-content/uploads/2020/09/41787s.jpg" alt="Students picture" />
+        </div>
+
+       <!-- About Harvard University -->
+       <div class="White-box">
+         <h2>About Harvard University</h2>
+          <div class="paragraph"></div> 
+         <p>
+           The University of Harvard is a global university with a reputation
+           for high-quality teaching and research. We help our graduates, staff and
+           students to shape the world. We’re an agent for change, connecting people,
+           innovating and transforming the lives of our students, staff and the global
+           communities we serve.
+         </p>
+         <a href="About us.html" class="link">More about Harvard University</a>
+       </div>
+     </div>
+
+      <!-- Residential Life in University -->
+     <section class="Residential-Life">
+        <div class="Text">
+          <h2>Residential Life</h2>
+          <p>
+            First-year dorms and upper-level Houses create a small-college experience within a major research university. Your House is where you eat, sleep—and lay the groundwork for lifelong friendships. The Office of Residential Life oversees four residence halls—Child, Conant, Perkins, and Richards, all of which are located in the North Yard of Harvard's Cambridge campus. The halls are Harvard’s most convenient and affordable graduate housing option. Each building has unique qualities, which you can find in the Residence Hall Tour section.
+         </p>
+       </div>
+
+       <!-- Split images layout: Right and Left side images -->
+       <div class="Image-container">
+          <div class="Left-picture">
+            <img src="https://gsas.harvard.edu/sites/default/files/styles/large_news_1/public/2023-02/20220511_StuCenterShots_DS_023.jpg?itok=Q1MSKLoL" alt="Harvard University">
+          </div>
+          <div class="Right-picture">
+            <img src="https://th.bing.com/th/id/OIP.oqLM0PqUB3apugFA5Av3fAHaEK?rs=1&pid=ImgDetMain" alt="Cricket club at Harvard University">
+            <img src="https://th.bing.com/th/id/R.eda59e9d572c973f960e1beaa420de20?rik=o1BERg%2fpRwLC9A&pid=ImgRaw&r=0" alt="Student enjoying food">
+          </div>
+       </div>
+     </section>
+  </main>  
+
+   <!-- Adding footer -->
+   <footer class="footer">
+        <div class="container-footer">
+            <p>Harvard University <br>
+             admissions@harvarduniversity <br> 176-825-5912</p>
+        
+            <div class="text-align">
+               <p>Study at Hardvard University <br>
+                  Undergraduate <br>
+                  Postgraduate <br>
+                  Continuing education <br>
+                  Executive and professional education <br>
+                  Courses in education</p>
+            </div>
+        
+             <div class="text-align">
+                <p>About the University <br>
+                  Give to Harvard University <br>
+                  Student life <br>
+                  New & Events <br>
+               </p>
+            </div>
+
+           <!-- Official links of the Harvard University -->
+          <div class="text-align">
+             <p><strong>Connect with us through:</strong><br>
+                <a href="https://www.instagram.com/harvard/" target="_blank" style="color: white; text-decoration: none;">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  Instagram
+                </a><br>
+
+                <a href="https://www.tiktok.com/@harvard" target="_blank" style="color: white; text-decoration: none;">
+                   <img src="tiktok.png" alt="TikTok" width="20" style="vertical-align: middle; margin-right: 5px;">
+                   TikTok
+                </a><br>
+
+                <a href="https://www.youtube.com/user/Harvard" target="_blank" style="color:white; text-decoration: none;">
+                   <img src="youtube.png" alt="YouTube" width="24" style="vertical-align: middle; margin-right: 5px;">
+                   YouTube
+                </a>
+              </p>
+           </div>
+        </div>
+    </footer>
+
+  <!-- Linking a JavaScript file  -->
+  <script src="Student life.js"></script>
+</body>
+</html>

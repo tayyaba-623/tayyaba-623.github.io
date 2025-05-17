@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<style>
+/* Universal Selector */
+* {
+  margin: 0;         /* Removes the default margin */
+  padding: 0;        /* Removes the default padding */
+  box-sizing: border-box;
+}
+
+ 
+body {
+     font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* Styling the Harvard University logo */
+.harvard-logo {
+  position: absolute;
+  top: 5px; 
+  left: 20px;
+  height: 100px;
+  width: auto;
+  z-index: 10;
+}
+
+/* Styling the side Navigation menu */
+.side-navigation {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 999; /* Higher value to ensure it’s on top */
+  top: 0;
+  right: 0;
+  left: auto;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+/* Styling the links of the side Navigation menu */
+.side-navigation a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Adding hover effect on the navigation links of side navigation menu */
+.side-navigation a:hover {
+  color:  #8c8c8c;
+}
+
+
+/* Styling close button of side navigation menu */
+.side-navigation .closebtn {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Styling the Hamburger icon (≣) */
+span[onclick="openNav()"] {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    color: white;
+    z-index: 9999;
+}
+
+.video {
+  position: relative;
+  height: 500px;  /* Height of the video */
+  overflow: hidden;
+  }
+
+.video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Adding semi-transparent overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* Creating box for the events */
+.box {
+   background-color: white;
+   border-radius: 10px;
+   overflow: hidden;
+   width: 280px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   margin-top: 100px;
+   position: relative;
+   transform: translateY(30px);
+   opacity: 0;       /* Hide the box for fade in animation */
+   transition: transform 0.4s ease, box-shadow 0.4s ease;   /* Smooth transition for the fade in animation */
+}
+
+/* Adding animation to make the box visible */
+.box.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}
+
+.box p {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.box h4 {
+  padding-left: 20px; 
+  padding: 15px;
+  color: #7c0c14;    /* Text color of the heading */
+  font-size: 20px;       /* Font size of the heading */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  max-width: 1300px; 
+  margin: 20px auto; 
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+/* Creating a footer */
+.footer {
+    background-color:  #800000;
+    color: white;
+    border-top: 6px solid  #ee9b00;
+    padding: 30px;
+    margin-top: 100px;
+}
+
+/* Styling the image */
+.picture-container {
+  position: relative;
+  width: 100%;         /* Width of the image */
+  height: 100vh;       /* Height of the image */
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  margin-top: 100px;
+}
+
+h2 { 
+   color: #800000;
+   font-size: 35px;
+   margin-left: 450px;
+}
+
+.Event-video {
+    margin-left: 430px;
+    margin-top: 80px;
+}
+
+</style>
+<body>
+    <header class="logo-title">
+       <!-- University Logo -->
+      <img src="website logo.png" alt="Harvard Logo" class="harvard-logo">
+    </header>
+  
+   <!-- Side Navigation Menu -->
+   <nav id="side-navigation" class="side-navigation">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="index.html">Home</a>
+      <a href="Undergraduate.html">Undergraduate</a>
+      <a href="Graduate.html">Graduate</a>
+      <a href="Student life.html">Student life</a>
+      <a href="Our faculty.html">Our faculty</a>
+      <a href="About Us.html">About Us</a>
+      <a href="Events.html">Events</a>
+   </nav>
+   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+   
+  <!-- Adding video -->
+   <section class="video">
+      <video autoplay muted loop>
+        <source src="Events.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <!-- Overlying text over video -->
+      <div class="overlay">
+          Upcoming Events at Harvard University
+      </div>
+   </section>
+
+  <!-- Upcoming Events -->
+ <main>
+      <section class="container">
+        <!-- Event 1: Mother's Day Celebration -->
+       <article class="box">
+          <img src="https://th.bing.com/th/id/OIP.Z-7KEfCBc2Z57iCve0QVOAHaE1?rs=1&pid=ImgDetMain" alt="Mother's Day" width="400px" height="200">
+          <h4>Mother's Day Celebration</h4>
+          <p>A special occasion to honour and appreciate mothers for their unending love and sacrifices. </p>
+       </article>
+
+       <!-- Event 2: Exhibition -->
+       <article class="box">
+         <img src="https://th.bing.com/th/id/OIP.IkKi4fgeBunw2k-JSzDSGQHaFk?rs=1&pid=ImgDetMain" alt="Exhibition" width="400px" height="200">
+         <h4>Exhibition</h4>
+         <p>Art of computer Science Exhibition</p>
+       </article>
+
+       <!-- Event 3: Lecture/Presentation/Talk -->
+       <article class="box">
+          <img src="https://th.bing.com/th/id/OIP.InN-B_zRYL7mgtt57RpUvAHaE8?rs=1&pid=ImgDetMain" alt="Students are taking a lecture"  width="400px" height="200">
+         <h4>Lecture/Presentation/Talk</h4>
+         <p>Sharing Experiences, Building critical Solidary </p>
+       </article>
+
+       <!-- Event 4: Lecture/Presentation/Talk -->
+       <article class="box">
+         <img src="https://img.freepik.com/premium-photo/beautiful-female-teacher-smiling-classroom_826801-4970.jpg" alt="Picture of teacher" width="400px" height="200">
+         <h4>Lecture/Presentation/Talk</h4>
+         <p>Data Work as Care Work with Marie</p>
+       </article>
+
+       <!-- Event 5: Meeting -->
+       <article class="box">
+         <img src="https://th.bing.com/th/id/OIP.51UnuM3gcgu6Yajh2Pjo2wHaE8?rs=1&pid=ImgDetMain" alt="Meeting" width="400px" height="200">
+         <h4>Meeting</h4>
+         <p>ReproducibiliTea - Harvard </p>
+       </article>
+
+      <!-- Event 6: Lecture/Presentation/Talk -->
+       <article class="box">
+          <img src="https://th.bing.com/th/id/OIP.oO5TkH4U-LhCwZtKXqHERwHaE7?w=1970&h=1313&rs=1&pid=ImgDetMain" alt="Picture of teacher" width="400px" height="200">
+         <h4>Lecture/Presentation/Talk</h4>
+         <p>Women Powering the Atom: Gendered labor and Expertise in Bulgaria's Nuclear Industry</p>
+      </article>
+
+      <!-- Event 7: Public Tour -->
+      <article class="box">
+        <img src="https://th.bing.com/th/id/OIP.LHnh3pYHwFr4oL1K6LoJCwHaE8?w=600&h=400&rs=1&pid=ImgDetMain" alt="Public tour of students"  width="400px" height="200">
+        <h4>Public Tour</h4>
+        <p>Explore the highlights of the Cantor's permanent collection on a public tour that leads you through a selection of works spanning varied cultures and <br> time periods. <br><strong>Location: </strong> Cantor Arts Center</p>
+      </article>
+
+      <!-- Event 8: Photography -->
+      <article class="box">
+         <img src="https://thephotographydaily.com/wp-content/uploads/2022/11/What-kind-of-photography-events-can-we-conduct-in-college.webp" alt="Students are taking a picture" width="400px" height="200">
+        <h4>Photography</h4>
+        <p>Super talented students can seize this opportunity to win and grow.</p>
+      </article>
+    </section>
+
+     <!-- Adding image -->
+     <section class="picture-container">
+       <div class="image">
+          <img src="https://th.bing.com/th/id/R.454b42cdb0a33d5519682152edb60f4a?rik=te15YAPGer8wGQ&riu=http%3a%2f%2fbradleyherald.org%2fwp-content%2fuploads%2f2015%2f04%2fHarvard-1032.jpg&ehk=j4DWhQ%2bIdf%2bDBq0bDg7dugfcDTpPPiIKTKzkvIU1NAs%3d&risl=&pid=ImgRaw&r=0" alt="Students picture" />
+       </div>
+     </section>
+
+      <!-- Video of CAMLab 2024 -->
+      <h2>CAMLab 2024 Programs and Events</h2> 
+      <section class="Event-video">
+         <iframe width="600" height="400" src="https://www.youtube.com/embed/K1TYLx8k0ik?si=eR3qfvyY__CbuM12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </section>
+  </main>
+ 
+
+   <!-- Adding Footer -->
+   <footer class="footer">
+     <div class="footer-container">
+        <p>
+          <strong>Harvard University</strong> <br>
+          admissions@harvarduniversity <br> 176-825-5912
+        </p>
+        
+        <div class="text-align">
+           <p>
+              <strong>Study at Harvard University</strong> <br>
+               Undergraduate <br>
+               Postgraduate <br>
+              Continuing education <br>
+              Executive and professional education <br>
+              Courses in education
+           </p>
+        </div>
+        
+        <div class="text-align">
+          <p>
+             <strong>About the University</strong> <br>
+             Give to Harvard University <br>
+             Student life <br>
+            New & Events <br>
+          </p>
+       </div>
+
+        <!-- Official links of the Harvard University -->
+        <div class="text-align">
+           <p><strong>Connect with us through:</strong><br>
+               <a href="https://www.instagram.com/harvard/" target="_blank" style="color: white; text-decoration: none;">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  Instagram
+               </a><br>
+
+               <a href="https://www.tiktok.com/@harvard" target="_blank" style="color: white; text-decoration: none;">
+                  <img src="tiktok.png" alt="TikTok" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  TikTok
+              </a><br>
+
+              <a href="https://www.youtube.com/user/Harvard" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="youtube.png" alt="YouTube" width="24" style="vertical-align: middle; margin-right: 5px;">
+                  YouTube
+              </a>
+           </p>
+         </div>
+      </div>
+   </footer>
+
+    <!-- Linking a JavaScript file  -->
+    <script src="Events.js"></script>
+       
+</body>
+</html>

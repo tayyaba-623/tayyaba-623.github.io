@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvard University Website</title>
+</head>
+<style>
+/* Universal Selector */
+* {
+  margin: 0;         /* Removes  the default margin */
+  padding: 0;        /* Removes the default padding */
+  box-sizing: border-box;
+}
+
+body {
+   font-family: 'Segoe UI', sans-serif;
+   background-color: #111;    /* Background color */
+}
+
+/* Styling the Harvard University logo */
+.harvard-logo {
+  position: absolute;
+  top: 5px; 
+  left: 20px;
+  height: 100px;
+  width: auto;
+  z-index: 10;
+}
+
+/* Styling the side Navigation menu */
+.Side-navigation {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: auto;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+/* Styling the links of the side Navigation menu */
+.Side-navigation a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Adding hover effect on the navigation links of side navigation menu */
+.Side-navigation a:hover {
+  color: #8c8c8c;
+}
+
+/* Styling close button of side navigation menu */
+.Side-navigation .close-button {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  left: auto;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Manage layout for small screens */
+@media screen and (max-height: 450px) {
+  .Sidenav-navigation {padding-top: 15px;}
+  .Sidenav-navigation a {font-size: 18px;}
+}
+
+/* Styling the Hamburger icon (≣) */
+span[onclick="openNav()"] {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  color: white;
+  z-index: 9999;
+}
+
+.heading {
+ background-image: url('https://wallpapercave.com/wp/wp1915250.jpg');   /* Background image */
+ background-size: cover;
+ background-position: center;
+ min-height: 100vh;      /* Minimun height of the image */
+ display: flex;
+ flex-direction: column;
+ justify-content: center;  
+ align-items: center;  
+ text-align: center;  
+}
+
+h1 {
+ color: white;
+ font-size: 50px;
+ font-weight: 900;
+ margin-bottom: 20px; 
+ position: relative;
+}
+
+.heading p {
+ color: white;
+ margin-left: 70px;
+ font-size: 30px;
+ position: relative;
+}
+
+/* Adding semi-transparent overlay */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(40, 39, 39, 0.6);
+    width: 100%;
+    height: 100%;
+}
+
+/* Adjusting the alignment of the heading */
+.text-alignment h2 {
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    margin-top: 30px;
+    transform: translateY(30px);  
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;  
+}
+
+/* Adding animation to make the box visible */
+.text-alignment h2.visible {
+  opacity: 1; 
+  transform: translateY(0);   
+  transition-delay: 0.4s; 
+}  
+
+/* Adjusting the alignment of the paragraph*/
+.text-alignment p {
+    width: 70%;
+    margin-left: 220px;
+    margin-top: 50px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    transform: translateY(30px); 
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;  
+}
+
+/* Adding animation to make the box visible */
+.text-alignment p.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+h3 {
+    font-size: 30px;
+    margin-left: 30px;
+    margin-top: 100px;
+    color: white;
+}
+
+/* Creating box for Events */
+.box {
+   width: 20%;
+   background-color: #fff;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.3);  /* Adds box shadow */
+   color: black;
+   margin-top: 70px;
+   flex: 1;
+   border-radius: 10px;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   transform: translateY(30px);  /* Adding animation to move the boxes in Y direction (downward) */
+   opacity: 0;
+   transition: opacity 0.5s ease, transform 0.5s ease;  /* Smooth transition for boxes */
+} 
+
+.box p {
+  color: black;
+  font-size: 18px;
+  padding: 30px;
+   
+}
+ 
+/* Adding animation to make the box visible */
+.box.visible {
+  opacity: 1; 
+  transform: translateY(0); 
+  transition-delay: 0.4s;
+}  
+ 
+/* container for events boxes */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+/* Styling button */
+.button button {
+    background-color:  #800000;   /* background color of the button */
+    color: white;             
+    border-radius: 25px;     /* Rounded the corners of the button */
+    padding: 10px;
+    margin-left: 700px;    /* Add space on the left side of the button*/
+    margin-bottom: 10px;   /* Add space below the button */
+    margin-top: 50px;     /* Add space at the top of the button */
+}
+
+
+.footer {
+    background-color:  #800000;      /* Background color of the footer */
+    color: white;               /* Text color */
+    border-top: 6px solid  #ee9b00;
+    padding: 30px;            /* Add space inside the footer */
+    margin-top: 100px;        /* Add space above the footer */
+}
+</style>
+<body>
+
+   <div class="image-overlay"> 
+        <!-- University Logo -->
+        <header class="logo-title">
+          <img src="website logo.png" alt="Harvard Logo" class="harvard-logo">
+        </header>
+
+       <!-- Side Navigation Menu -->
+       <nav id="Side-navigation" class="Side-navigation">
+         <a href="javascript:void(0)" class="close-button" onclick="closeNav()">&times;</a>
+         <a href="Undergraduate.html">Undergraduate</a>
+         <a href="Graduate.html">Graduate</a>
+         <a href="Student life.html">Student life</a>
+         <a href="Our faculty.html">Our faculty</a>
+         <a href="About Us.html">About Us</a>
+         <a href="Events.html">Events</a>
+       </nav>
+       <span style="font-size:28px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    </div>
+
+   <main>   
+        <!-- Heading -->
+        <section class="heading">
+          <h1>🎓 Welcome to Harvard University</h1>
+          <p>Where your dreams come true ✨</p>
+        </section>
+
+     <!-- Mission of the University -->
+     <section class="text-alignment">
+         <h2>Our Mission</h2>
+         <p>The mission of Harvard College is to educate the citizens and citizen-leaders for our society. We do this through our commitment to the transformative power of a liberal arts and sciences education. Beginning in the classroom with exposure to new ideas, new ways of understanding, and new ways of knowing, students embark on a journey of intellectual transformation. Through a diverse living environment, where students live with people who are studying different topics, who come from different walks of life and have evolving identities, intellectual transformation is deepened and conditions for social transformation are created. From this we hope that students will begin to fashion their lives by gaining a sense of what they want to do with their gifts and talents, assessing their values and interests, and learning how they can best serve the world.</p>
+     </section>
+
+    <!-- Events -->
+     <section>
+        <h3>Events</h3>
+        <div class="container">
+          <!-- Event 1  -->
+          <article class="box">
+             <img src="https://th.bing.com/th/id/OIP.7S_m35gZYN_-Ln4mN4iIYQHaE8?rs=1&pid=ImgDetMain" alt="Students studying together" width="100%" height="300px">
+             <p><strong>Admissions</strong> - Subject Masterclasses: until Thursday 15 May Explore your chosen subject in greater depth while experiencing typical undergraduate teaching at Cambridge with our Subject Masterclasses.</p>
+          </article>
+
+          <!-- Event 2 -->
+          <article class="box">
+             <img src=" https://th.bing.com/th/id/OIP.6FzVtObNxiSumpfetKwW2QHaE7?w=900&h=599&rs=1&pid=ImgDetMain" alt="Students working on a Presentation" width="100%" height="300px">
+             <p><strong>Admissions</strong> -  AIM PhD: July 2025 to January 2026 Are you considering a PhD at Cambridge starting in 2026? Join AIM: PhD to receive 6 months of support preparing your PhD application. Apply by 18 May to join the programme.</p>
+          </article>
+   
+          <!-- Event 3 -->
+          <article class="box">
+            <img src="https://clubstudio.co.uk/assets/images/_1200x630_crop_center-center_82_none/Colleagues-Business-Meeting.jpeg?mtime=1615218664" alt="Teachers in discussion" width="100%" height="300px">
+            <p><strong>Exhibitions</strong> - Curious Cures: until 6 December 2025 Health and disease in the medieval world – and how our ancestors sought to cure everything from infertility to constipation – are the focus of a major new exhibition at the University Library.</p>
+          </article>
+       </div>  
+
+        <!-- Button to navigate to the next page for more Events -->
+        <div class="button">
+          <a href="Events.html" target="_blank">
+           <button>More Events</button> 
+          </a>
+        </div>
+     </section>   
+
+    <!-- Adding Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <strong>Harvard University</strong> <br>
+          admissions@harvarduniversity <br> 176-825-5912
+        </p>
+        
+        <div class="text-align">
+         <p>
+           <strong>Study at Hardvard University</strong> <br>
+           Undergraduate <br>
+           Postgraduate <br>
+           Continuing education <br>
+           Executive and professional education <br>
+           Courses in education
+         </p>
+       </div>
+        
+        <div class="text-align">
+         <p>
+           <strong>About the University</strong> <br>
+           Give to Harvard University <br>
+           Student life <br>
+           New & Events <br>
+         </p>
+        </div>
+
+        <!-- Official links of the Harvard University -->
+        <div class="text-align">
+           <p>
+            <strong>Connect with us through:</strong><br>
+              <a href="https://www.instagram.com/harvard/" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  Instagram
+              </a><br>
+
+              <a href="https://www.tiktok.com/@harvard" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="tiktok.png" alt="TikTok" width="20" style="vertical-align: middle; margin-right: 5px;">
+                  TikTok
+              </a><br>
+
+              <a href="https://www.youtube.com/user/Harvard" target="_blank" style="color: white; text-decoration: none;">
+                 <img src="youtube.png" alt="YouTube" width="24" style="vertical-align: middle; margin-right: 5px;">
+                 YouTube
+              </a>
+           </p>
+        </div>
+      </div>
+    </footer>
+
+  <!-- Linking a JavaScript file  -->
+   <script src="index.js"></script>
+
+</body>
+</html>
